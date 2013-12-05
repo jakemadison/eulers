@@ -1,12 +1,12 @@
-#!/usr/bin/python2
+#!/usr/bin/python
 # -*- coding: utf-8
-
 #stubb for project:  4
+
 # A palindromic number reads the same both ways. The largest palindrome made from the product of two
 # 2-digit numbers is 9009 = 91 × 99.
 # Find the largest palindrome made from the product of two 3-digit numbers.
 
-#decremendown from max, find a palindrome, then good!
+#decremendown from max, find a palindrome, does it have good factors? then good!
 
 maxnum = 999*999
 
@@ -22,17 +22,15 @@ def is_palindrome(n):
     #if we only have two numbers, true if they are equal
     if len(n) == 2:
         if n[0] == n[-1]:
-            print n[0], n[1], 'True'
             return True
         else:
-            print n[0], n[1], 'False'
             return False
 
     #if we have more than two numbers, compare the substring..
     #if outer numbers are equal that is.
     if len(n) > 2 and n[0] == n[-1]:
         subs = n[1:-1]
-        print subs
+        #print subs
         if is_palindrome(subs):
             return True
         else:
@@ -42,11 +40,22 @@ def is_palindrome(n):
         return False
 
 
-# you know what, i bet it's because 997799 is a prime... so can't be split into two ints.
-# or at least, cannot be split into two, 3-digit nums
-# i need to get a case of all 3 digits * all 3 digits
-# could make a function that tests if number can be factored into two 3 digit nums
-# or could iterate through different combinations of 3 digit num multiples.
+#give me a number, i'll tell you if it can be broken into 2, 3-digit factors
+def is_trip_factor(n):
+
+    n = int(n)
+    fac = 999
+
+    while fac > 99:
+        if n % fac == 0:
+            if len(str(n/fac)) == 3:
+                print '::', fac, (n/fac)
+                return True
+
+        fac -= 1
+
+    return False
+
 
 def main():
     x = maxnum
@@ -54,14 +63,15 @@ def main():
     while x > lim:
         if is_palindrome(x):
             print x
-            break
-
+            if is_trip_factor(x):
+                print '---------->', x
+                break
+            else:
+                x -= 1
         else:
-            #print x
             x -= 1
 
-#need to have a case for when there are two
-#print is_palindrome(9 9 79 9 9)
+
 main()
 
 
