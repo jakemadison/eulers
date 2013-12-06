@@ -10,6 +10,7 @@
 #gimmie a number... iterate up to that number yielding primes
 #wait, might not work... if a number is divisible by two,
 #might not be evenly divisible by 4 eg: 6
+
 def primes(n):
     yield 1
     yield 2
