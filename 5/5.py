@@ -8,14 +8,27 @@
 
 
 #gimmie a number... iterate up to that number yielding primes
+#wait, might not work... if a number is divisible by two,
+#might not be evenly divisible by 4 eg: 6
 def primes(n):
     yield 1
     yield 2
     yield 3
     x = 4
     while x < n:
+        if isPrime(x):
+            yield x
+            x += 1
+        else:
+            x += 1
 
 
+def isPrime(n):
+    limit = int(n ** 0.5)+1
+    for num in range(2,limit):
+        if n % num == 0: return False
+
+    return True
 
 
 
@@ -45,7 +58,10 @@ def main():
         rng -= 1
 
 
-main()
+for y in primes(20):
+    print y
+
+# main()
 
 
 
