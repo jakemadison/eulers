@@ -11,6 +11,36 @@
 #wait, might not work... if a number is divisible by two,
 #might not be evenly divisible by 4 eg: 6
 
+# here's one optimization, iterate up by 20., check if divisible by 19 first.
+# what about iterating by the multiples of all the primes together that are
+# less than the number? eg, all primes below 10: 2 * 3 * 5 * 7 * 9 =
+
+
+#okay, so this definitely works within a decent amount of time,
+#but is not very elegant.  Then again, optimize = it's perfect when it works.
+def divTest(n, rn):
+    x = rn
+    while x > 1:
+        if n % x != 0:
+            return False
+        x -= 1
+    return True
+
+start = 20
+ran = 20
+while not divTest(start, ran):
+    start += ran
+print start
+print 'done!'
+
+#print 'working...'
+#print divTest(2520, 10)
+
+#print(2520 / (9 * 8 * 7))
+
+
+
+
 def primes(n):
     yield 1
     yield 2
@@ -59,8 +89,8 @@ def main():
         rng -= 1
 
 
-for y in primes(20):
-    print y
+#for y in primes(20):
+#    print y
 
 # main()
 
