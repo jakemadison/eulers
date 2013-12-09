@@ -31,38 +31,27 @@ def get_list(num):
     def break_number(n):
         lst = []
         a = n - 1
-        while True:
-            # print a
-            if (n - a) < a:
-                b = n - a
-                lst.append((a, b))
-                a -= 1
-            else:
-                break
+        while (n - a) < a:
+            b = n - a
+            lst.append((a, b))
+            a -= 1
 
         return lst
 
     #our number to the left:
     p = num - 1
 
-    while True:
-        if p > num/4:
-            b = num - p
+    while p > num/4:
+        b = num - p
+        x = break_number(b)
+        for each in x:
+            if is_series(each[1], each[0], p):
+                if is_triplet(each[1], each[0], p):
+                    print 'a:', each[1], 'b:', each[0], 'c:', p
+                    print 'product: ', each[1] * each[0] * p
 
-            x = []
-
-            x = break_number(b)
-            for each in x:
-                #print 'result: ', p, each[0], each[1]
-                if is_series(each[1], each[0], p):
-                    if is_triplet(each[1], each[0], p):
-                        print 'a:', each[1], 'b:', each[0], 'c:', p
-                        print 'product: ', each[1] * each[0] * p
-
-            p -= 1
-
-        else:
-            break
+        p -= 1
 
 
+get_list(12)
 get_list(1000)
