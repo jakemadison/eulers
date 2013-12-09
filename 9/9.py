@@ -10,8 +10,7 @@
 # if its a and b can be squarerooted also...
 #
 
-import math
-
+# I can't believe this ugly garbage actually worked!!!
 
 def is_series(a, b, c):
     if a < b < c:
@@ -47,32 +46,69 @@ c = 3
 #         break
 #     else:
 
+def get_list(num):
+    def break_number(n):
+        lst = []
+        a = n - 1
+        while True:
+            # print a
+            if (n - a) < a:
+                b = n - a
+                lst.append((a, b))
+                a -= 1
+            else:
+                break
+
+        return lst
+
+    #our number to the left:
+    p = num - 1
+
+    while True:
+        if p > num/4:
+            b = num - p
+
+            x = []
+
+            x = break_number(b)
+            for each in x:
+                #print 'result: ', p, each[0], each[1]
+                if is_series(each[1], each[0], p):
+                    if is_triplet(each[1], each[0], p):
+                        print 'a:', each[1], 'b:', each[0], 'c:', p
+                        print 'product: ', each[1] * each[0] * p
+
+            p -= 1
+
+        else:
+            break
 
 
+get_list(1000)
 
-
-print is_triplet(1,2,3)
-print is_triplet(3,4,5)
-print is_triplet(4,5,6)
-
-
-max_total = 1000
-
-
-
-# i could find all of the a < b < c's that are under tt, then test if they are pythagorean triplets.
-
-
-a = 3
-b = 4
-
-c = int(math.sqrt((a ** 2) + (b ** 2)))
-
-temptotal = a + b + c
-print 'temptotal: ', temptotal
-
-print c
-
-c = 5
-
-
+#
+# print is_triplet(1,2,3)
+# print is_triplet(3,4,5)
+# print is_triplet(4,5,6)
+#
+#
+# max_total = 1000
+#
+#
+#
+# # i could find all of the a < b < c's that are under tt, then test if they are pythagorean triplets.
+#
+#
+# a = 3
+# b = 4
+#
+# c = int(math.sqrt((a ** 2) + (b ** 2)))
+#
+# temptotal = a + b + c
+# print 'temptotal: ', temptotal
+#
+# print c
+#
+# c = 5
+#
+#
