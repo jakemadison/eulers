@@ -43,7 +43,7 @@ def right(r, n):
 
 def down(r, n):
     if len(grid) - r >= 5:
-        print grid[r:r+5][n]  # why can't you slice down? that's retarded.
+        print grid[r:r+5][n]  # okay, no as usual, PEBKAC. slicing makes sense again!
     else:
         return False
 
@@ -55,7 +55,8 @@ for i, x in enumerate(grid):
     print i
     #down(i, 0)
 
-print grid[0][0]
-print grid[1][0]
-
+# print grid[0][0]
+# print grid[1][0]
+for each in grid:
+    print each[0]
 
