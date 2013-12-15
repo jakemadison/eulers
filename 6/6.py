@@ -11,6 +11,11 @@
 
 # seems like a pretty good candidate for generator functions..
 
+#does the same thing with 4 lines of code:
+rn = 100
+s1 = sum(x ** 2 for x in xrange(rn+1))
+s2 = sum(y for y in xrange(rn+1)) ** 2
+print s2 - s1
 
 def sumofsquares(maxm):
 
@@ -54,3 +59,5 @@ a = sumofsquares(100)
 b = squareofsums(100)
 
 print b - a
+
+

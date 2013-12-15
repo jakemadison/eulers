@@ -33,30 +33,114 @@ grid = [
 ]
 
 
+#give me a list, i'll give you the product:
+def return_total(n):
+    tot = 1
+    for x in n:
+        tot *= x
+
+    return tot
+
+
 #no real reason to have a left, this should get all of them
 def right(r, n):
     if (len(grid[r]) - n) >= 5:
-        print grid[r][n:n+5]
+        return grid[r][n:n+5]
     else:
         return False
 
 
+#ugly, but it works:
 def down(r, n):
-    if len(grid) - r >= 5:
-        print grid[r:r+5][n]  # okay, no as usual, PEBKAC. slicing makes sense again!
+    ar = []  # holds our down slice
+    for each in grid:
+        ar.append(each[n])
+
+    if len(ar[r:r+5]) >= 5:
+        return ar[r:r+5]
     else:
         return False
 
 
-for i, x in enumerate(grid[0]):
-    right(0, i)
+def diagonal(r, n):
+    print grid[r+1][n+1]
+    print grid[r+2][r+2]
 
-for i, x in enumerate(grid):
-    print i
-    #down(i, 0)
 
-# print grid[0][0]
-# print grid[1][0]
-for each in grid:
-    print each[0]
+def testing():
+    mx = 0
+    mx_arr = []
 
+    for yind, y in enumerate(grid):
+        for xind, y in enumerate(y):
+            temp = down(xind, yind)
+            if temp and len(temp) >= 5:
+                final = return_total(temp)
+
+            if final and final > mx:
+                mx = final
+                mx_arr = temp
+
+            temp = right(xind, yind)
+
+            if temp and len(temp) >= 5:
+                final2 = return_total(temp)
+
+            if final2 and final2 > mx:
+                mx = final
+                mx_arr = temp
+
+    print mx, mx_arr
+
+
+# given a set of coordinates, who are my neighbours?
+def find_neighbours(r, n):
+    rts = []
+    dns = []
+    lefs = []
+    ups = []
+
+    #i bet i can replace this for loop with slices
+
+    if (len(grid[r]) - n) >= 5:
+        rts.append(grid[r][n:n+5])  # find ns to the right of me
+
+
+    lefs.append(grid[r][n:n-5:-1])
+
+    #yeah, this ain't workin '
+    if (len(grid) - r) >= 5:
+        dns.append(grid[r:r+5][n])  # find ns below me
+
+    #gets tricky here:
+
+
+    #ah fuck. you can't slice UP stupid. This is not a matrix, but a list of lists
+    # wait, then why does down work?
+    #ups.append(grid[r:r-5:-1][n])
+
+    print rts
+    print dns
+    print lefs
+    print ups
+
+
+find_neighbours(0, 0)
+
+
+print 'done!'
+
+crap = [0,1,2,3,4,5]
+
+#start at 5, go backwards to 0, do it in steps of -1
+# for mine it will be start at position n within grid r, go back.. crap how many, it's relative to n
+
+a = 1
+print crap[a:a+2]
+
+# okay, wait.  should i be considering this as iterating through the types
+# of possible lines that can be formed from the grid,
+# or, from each point's point of view.
+# eg, I am a point, who are my neighbours? out of those neighbours,
+# can I create a row of 5? or better, what's my highest row of five that I can generate??
+# since it's just the answer they're are looking for, multiple positives are OK.
